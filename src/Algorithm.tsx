@@ -5,20 +5,19 @@
 //   [21, 1, 27, 43, 52],
 //   [24, 31, 32, 45, 56],
 // ];
-var a = [
-  [0, 1, 0, 0, 0],
-  [0, 1, 0, 0, 0],
-  [0, 1, 0, 0, 0],
-  [0, 1, 69, 0, 0],
-  [0, 0, 0, 0, 0],
-];
 
-var rows = 5;
-var cols = 5;
+import { useState } from "react";
+
+var rows = 20;
+var cols = 15;
+
+let a: number[][] = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+
+// a[2][2] = 69;
 
 // for (let i = 0; i < rows; i++) {
 //   for (let j = 0; j < cols; j++) {
-//     a[i][j]=0
+//     a[i][j] == undefined ? (a[i][j] = 0) : (a[i][j] = 0);
 //   }
 // }
 
@@ -71,11 +70,14 @@ var visited: Array<Array<number>> = [];
 var currenttracker: Array<Array<number>> = [];
 var targetlocklocation: Array<number>;
 function advance(startx: number, starty: number) {
+  queue = [];
+  visited = [];
+  currenttracker = [];
   queue.push([startx, starty]);
   while (queue.length != 0) {
     var current: Array<number> = queue.shift()!;
     currenttracker.push(current);
-    if (!visited.includes(current!)) {
+    if (!isArrayInArray(visited, current)) {
       visited.push(current);
       // console.log(current);
       var nvs = getNeighbours(current[0], current[1]);
@@ -94,42 +96,89 @@ function advance(startx: number, starty: number) {
   }
 }
 function Display() {
+  const [Navigate, setNavigate] = useState(false);
+  const [Xvalue, setXvalue] = useState(Number);
+  const [Yvalue, setYvalue] = useState(Number);
+
+  function navigate() {
+    a = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
+
+    a[Xvalue][Yvalue] = 69;
+    console.log(a[0][0]);
+
+    console.log(a[Xvalue][Yvalue]);
+
+    advance(14, 14);
+  }
   function CustomClass(i1: number, i2: number) {
     // console.log(i1, i2);
-    if (isArrayInArray(regeneratePath(currenttracker), [i1, i2])) {
-      return "bg-red-200";
+    if (
+      isArrayInArray(regeneratePath(currenttracker), [i1, i2]) &&
+      (i1 = i2) !== 0 &&
+      Navigate
+    ) {
+      return "bg-red-500";
+    }
+    // if (i1 == 14 && i2 == 9 && Navigate) {
+    //   return "bg-blue-500";
+    // }
+  }
+  function checkNavigate() {
+    if (Navigate == false) {
+      return "pointer-events-none";
     }
   }
   return (
-    <div
-      className={
-        "grid grid-rows-" +
-        rows +
-        " grid-cols-" +
-        cols +
-        " opacity-90 absolute w-full h-full pointer-events-none"
-      }
-    >
-      {a.map((array, index1) => {
-        return (
-          <>
-            {array.map((element, index2) => {
-              return (
-                <span
-                  key={index2}
-                  className={"border active:bg-green-200 " + CustomClass(index1, index2)}
-                >
-                  {element}
-                </span>
-              );
-            })}
-          </>
-        );
-      })}
-    </div>
+    <>
+      <button
+        className="text-xl absolute z-10 bg-black text-white p-4 rounded m-4"
+        onClick={() => {
+          setNavigate(!Navigate);
+          console.log(Xvalue, Yvalue);
+
+          navigate();
+        }}
+      >
+        {Navigate ? "Exit Navigation" : "Navigate"}
+      </button>
+      <input
+        className="text-sm absolute bg-black text-white z-10 p-4 rounded m-4 mt-20 w-14"
+        type="number"
+        placeholder="X"
+        value={Xvalue}
+        onChange={(e) => setXvalue(parseInt(e.target.value))}
+      />
+      <input
+        className="text-sm absolute bg-black text-white z-10 p-4 rounded m-4 mt-20 ms-24 w-14"
+        type="number"
+        placeholder="Y"
+        value={Yvalue}
+        onChange={(e) => setYvalue(parseInt(e.target.value))}
+      />
+      <div
+        className={
+          "grid grid-cols-[repeat(15,_minmax(0,_1fr))] grid-rows-[repeat(20,_minmax(0,_1fr))] opacity-90 absolute w-full h-full " +
+          checkNavigate()
+        }
+      >
+        {a.map((row, index1) =>
+          row.map((cell, index2) => {
+            return (
+              <span
+                key={index2}
+                className={"text-white text-opacity-0 " + CustomClass(index1, index2)}
+                onFocus={() => console.log("HELLO")}
+              >
+                {cell}
+              </span>
+            );
+          })
+        )}
+      </div>
+    </>
   );
 }
-advance(0, 0);
+
 // console.log(currenttracker);
 
 // console.log("yellow");
