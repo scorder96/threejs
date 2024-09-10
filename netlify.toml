@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/api/trains"
+  to = "/.netlify/functions/getTrains"
+  status = 200
