@@ -24,9 +24,21 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
+function serverIgnitiion() {
+  const filePath = path.join(__dirname, 'elementsData.json');
+  
+  // Check if the JSON file exists
+  if (fs.existsSync(filePath)) {
+    const jsonData = fs.readFileSync(filePath, 'utf-8');
+    return json(JSON.parse(jsonData));
+  } else {
+    return JSON.stringify({ message: 'API dysfunctional' });
+  }
+}
+
 exports.handler = async (event, context) => {
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: 'Hello from Netlify Function!' }),
+  body: serverIgnitiion()
   };
 };
