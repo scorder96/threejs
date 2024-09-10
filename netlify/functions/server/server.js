@@ -4,7 +4,7 @@ const path = require('path');
 exports.handler = async (event, context) => {
   try {
     // Read the JSON file synchronously
-    const jsonPath = path.resolve(__dirname, './trainStations.json');
+    const jsonPath = path.resolve(__dirname, './trainData.json');
     const fileContents = fs.readFileSync(jsonPath, 'utf8');
     
     // Parse JSON data
