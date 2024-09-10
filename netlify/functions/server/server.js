@@ -30,7 +30,7 @@ function serverIgnitiion() {
   // Check if the JSON file exists
   if (fs.existsSync(filePath)) {
     const jsonData = fs.readFileSync(filePath, 'utf-8');
-    return json(JSON.parse(jsonData));
+    return JSON.parse(jsonData);
   } else {
     return JSON.stringify({ message: 'API dysfunctional' });
   }
