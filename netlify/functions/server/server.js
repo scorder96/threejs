@@ -1,44 +1,30 @@
-import express from 'express';
-import fs from 'fs';
-import path from 'path';
-
-const app = express();
-const port = 3000;
-// const __dirname = path.resolve();
-
-// Endpoint to serve the JSON file
-app.get('/data', (req, res) => {
-  const filePath = path.join(__dirname, 'elementsData.json');
-  
-  // Check if the JSON file exists
-  if (fs.existsSync(filePath)) {
-    const jsonData = fs.readFileSync(filePath, 'utf-8');
-    res.json(JSON.parse(jsonData));
-  } else {
-    res.status(404).send('JSON file not found');
-  }
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
-
-function serverIgnitiion() {
-  const filePath = path.join(__dirname, 'elementsData.json');
-  
-  // Check if the JSON file exists
-  if (fs.existsSync(filePath)) {
-    const jsonData = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(jsonData);
-  } else {
-    return JSON.stringify({ message: 'API dysfunctional' });
-  }
-}
+const fs = require('fs');
+const path = require('path');
 
 exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-  body: serverIgnitiion()
-  };
+  try {
+    // Read the JSON file synchronously
+    const jsonPath = path.resolve(__dirname, './elementsData.json');
+    const fileContents = fs.readFileSync(jsonPath, 'utf8');
+    
+    // Parse JSON data
+    const trains = JSON.parse(fileContents);
+
+    // Return the JSON data in the response
+    return {
+      statusCode: 200,
+      body: JSON.stringify(trains),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+  } catch (error) {
+    console.error('Error reading JSON file:', error);
+    
+    // Handle errors and return a 500 status
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Internal Server Error' }),
+    };
+  }
 };
