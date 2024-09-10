@@ -15,7 +15,7 @@ function Scene() {
     0.1,
     1000
   );
-  camera.position.set(0, 2, 0);
+  camera.position.set(0, 80, 0);
   camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer();
@@ -31,7 +31,7 @@ function Scene() {
 
   const loader = new GLTFLoader();
   loader.load(
-    "/station.gltf",
+    "/AB2.glb",
     function (gltf) {
       gltf.scene.scale.set(4, 4, 4);
       scene.add(gltf.scene);

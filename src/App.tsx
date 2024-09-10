@@ -1,11 +1,27 @@
-import Display from "./Algorithm";
+import AlgorithmDisplay from "./Algorithm";
 import Scene from "./Scene";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <Scene />
-      <Display />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Scene />
+                <AlgorithmDisplay />
+              </>
+            }
+          >
+            {/* <Route index element={<Home />} /> */}
+            {/* <Route path="blogs" element={<Blogs />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="*" element={<NoPage />} /> */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

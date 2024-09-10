@@ -7,6 +7,9 @@
 // ];
 
 import { useState } from "react";
+// import { StatusDrawer } from "./StatusDrawer";
+import { Button } from "./components/ui/button";
+// import { StatusDrawer } from "./StatusDrawer";
 
 var rows = 20;
 var cols = 15;
@@ -95,7 +98,7 @@ function advance(startx: number, starty: number) {
     }
   }
 }
-function Display() {
+function AlgorithmDisplay() {
   const [Navigate, setNavigate] = useState(false);
   const [Xvalue, setXvalue] = useState(Number);
   const [Yvalue, setYvalue] = useState(Number);
@@ -130,7 +133,7 @@ function Display() {
   }
   return (
     <>
-      <button
+      <Button
         className="text-xl absolute z-10 bg-black text-white p-4 rounded m-4"
         onClick={() => {
           setNavigate(!Navigate);
@@ -140,7 +143,8 @@ function Display() {
         }}
       >
         {Navigate ? "Exit Navigation" : "Navigate"}
-      </button>
+      </Button>
+      {/* <StatusDrawer /> */}
       <input
         className="text-sm absolute bg-black text-white z-10 p-4 rounded m-4 mt-20 w-14"
         type="number"
@@ -167,7 +171,7 @@ function Display() {
               <span
                 key={index2}
                 className={"text-white text-opacity-0 " + CustomClass(index1, index2)}
-                onFocus={() => console.log("HELLO")}
+                // onFocus={() => console.log("HELLO")}
               >
                 {cell}
               </span>
@@ -186,4 +190,4 @@ function Display() {
 // console.log(regeneratePath(currenttracker));
 // console.log(currenttracker);
 
-export default Display;
+export default AlgorithmDisplay;
