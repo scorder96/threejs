@@ -4,7 +4,7 @@ import path from 'path';
 
 const app = express();
 const port = 3000;
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 // Endpoint to serve the JSON file
 app.get('/data', (req, res) => {
