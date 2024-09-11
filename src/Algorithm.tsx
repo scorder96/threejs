@@ -5,10 +5,10 @@ var rows = 40;
 var cols = 30;
 
 let a: number[][] = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
-var obstaclex: Array<number> = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25,
-  26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
-];
+// var obstaclex: Array<number> = [
+//   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25,
+//   26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+// ];
 // var obstacley: Array<number> = [
 //   16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16,
 // ];
@@ -74,7 +74,7 @@ function advance(startx: number, starty: number) {
       var nvs = getNeighbours(current[0], current[1]);
       for (let i = 0; i < nvs.length; i++) {
         var neighbour = nvs[i];
-        if (a[neighbour[0]][neighbour[1]] != 1 || obstaclex.includes(neighbour[0])) {
+        if (a[neighbour[0]][neighbour[1]] != 1) {
           queue.push(neighbour);
           // console.log(queue);
           if (a[neighbour[0]][neighbour[1]] == 69) {
@@ -114,9 +114,9 @@ function AlgorithmDisplay() {
     if (i1 == 14 && i2 == 9 && Navigate) {
       return "bg-blue-500";
     }
-    if (obstaclex.includes(i1) && i2 == 16 && Navigate) {
-      return "bg-green-800";
-    }
+    // if (obstaclex.includes(i1) && i2 == 16 && Navigate) {
+    //   return "bg-green-800";
+    // }
   }
   function checkNavigate() {
     if (Navigate == false) {
