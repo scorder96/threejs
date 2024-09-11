@@ -1,25 +1,22 @@
 import AlgorithmDisplay from "./Algorithm";
-import Scene from "./Scene";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Scene2D from "./Scene2D";
+import Scene3D from "./Scene3D";
+
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path="2d"
             element={
               <>
-                <Scene />
-                <AlgorithmDisplay />
+                <Scene2D /> <AlgorithmDisplay />
               </>
             }
-          >
-            {/* <Route index element={<Home />} /> */}
-            {/* <Route path="blogs" element={<Blogs />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="*" element={<NoPage />} /> */}
-          </Route>
+          />
+          <Route path="3d" element={<Scene3D />} />
         </Routes>
       </BrowserRouter>
     </>

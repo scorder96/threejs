@@ -1,28 +1,10 @@
-// var a = [
-//   [15, 13, 11, 41, 53],
-//   [16, 12, 23, 42, 51],
-//   [19, 17, 18, 44, 55],
-//   [21, 1, 27, 43, 52],
-//   [24, 31, 32, 45, 56],
-// ];
-
 import { useState } from "react";
-// import { StatusDrawer } from "./StatusDrawer";
 import { Button } from "./components/ui/button";
-// import { StatusDrawer } from "./StatusDrawer";
 
 var rows = 20;
 var cols = 15;
 
 let a: number[][] = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
-
-// a[2][2] = 69;
-
-// for (let i = 0; i < rows; i++) {
-//   for (let j = 0; j < cols; j++) {
-//     a[i][j] == undefined ? (a[i][j] = 0) : (a[i][j] = 0);
-//   }
-// }
 
 function isArrayInArray(arr: Array<Array<number>>, item: Array<number>) {
   var item_as_string = JSON.stringify(item);
@@ -137,8 +119,6 @@ function AlgorithmDisplay() {
         className="text-xl absolute z-10 bg-black text-white p-4 rounded m-4"
         onClick={() => {
           setNavigate(!Navigate);
-          console.log(Xvalue, Yvalue);
-
           navigate();
         }}
       >
