@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { Button } from "./components/ui/button";
 
-var rows = 20;
-var cols = 15;
+var rows = 40;
+var cols = 30;
 
 let a: number[][] = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
-
+var obstaclex: Array<number> = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 25,
+  26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+];
+var obstacley: Array<number> = [
+  16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16,
+];
 function isArrayInArray(arr: Array<Array<number>>, item: Array<number>) {
   var item_as_string = JSON.stringify(item);
 
@@ -68,7 +74,7 @@ function advance(startx: number, starty: number) {
       var nvs = getNeighbours(current[0], current[1]);
       for (let i = 0; i < nvs.length; i++) {
         var neighbour = nvs[i];
-        if (a[neighbour[0]][neighbour[1]] != 1) {
+        if (a[neighbour[0]][neighbour[1]] != 1 || obstaclex.includes(neighbour[0])) {
           queue.push(neighbour);
           // console.log(queue);
           if (a[neighbour[0]][neighbour[1]] == 69) {
@@ -95,6 +101,7 @@ function AlgorithmDisplay() {
 
     advance(14, 14);
   }
+
   function CustomClass(i1: number, i2: number) {
     // console.log(i1, i2);
     if (
@@ -104,9 +111,12 @@ function AlgorithmDisplay() {
     ) {
       return "bg-red-500";
     }
-    // if (i1 == 14 && i2 == 9 && Navigate) {
-    //   return "bg-blue-500";
-    // }
+    if (i1 == 14 && i2 == 9 && Navigate) {
+      return "bg-blue-500";
+    }
+    if (obstaclex.includes(i1) && i2 == 16 && Navigate) {
+      return "bg-green-800";
+    }
   }
   function checkNavigate() {
     if (Navigate == false) {
@@ -116,7 +126,7 @@ function AlgorithmDisplay() {
   return (
     <>
       <Button
-        className="text-xl absolute z-10 bg-black text-white p-4 rounded m-4"
+        className="text-xl absolute z-10 bg-black text-white p-4 rounded m-4 ms-32"
         onClick={() => {
           setNavigate(!Navigate);
           navigate();
@@ -141,7 +151,7 @@ function AlgorithmDisplay() {
       />
       <div
         className={
-          "grid grid-cols-[repeat(15,_minmax(0,_1fr))] grid-rows-[repeat(20,_minmax(0,_1fr))] opacity-90 absolute w-full h-full " +
+          "grid grid-cols-[repeat(30,_minmax(0,_1fr))] grid-rows-[repeat(40,_minmax(0,_1fr))] opacity-90 absolute w-full h-full " +
           checkNavigate()
         }
       >
@@ -150,7 +160,10 @@ function AlgorithmDisplay() {
             return (
               <span
                 key={index2}
-                className={"text-white text-opacity-0 " + CustomClass(index1, index2)}
+                className={
+                  "text-white text-opacity-0 border border-black " +
+                  CustomClass(index1, index2)
+                }
                 // onFocus={() => console.log("HELLO")}
               >
                 {cell}

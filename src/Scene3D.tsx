@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 // import local_parking from "/src/assets/local_parking.svg";
 // import restaurant from "/src/assets/restaurant.svg";
 // import washroom from "/src/assets/washroom.svg";
-import { useState } from "react";
 
 function Scene3D() {
   const scene = new THREE.Scene();
@@ -36,7 +35,6 @@ function Scene3D() {
   //   controls.maxPolarAngle = 0;
   //   controls.minDistance = 1;
   //   controls.maxDistance = 4;
-  const [Loading, setLoading] = useState(String);
   const loader = new GLTFLoader();
   loader.load(
     "/railwayst1.glb",
@@ -44,9 +42,7 @@ function Scene3D() {
       // gltf.scene.scale.set(4, 4, 4);
       scene.add(gltf.scene);
     },
-    function (xhr) {
-      setLoading("Loading " + (xhr.loaded / xhr.total) * 100);
-    },
+    undefined,
     function (error) {
       console.error(error);
     }
@@ -189,7 +185,6 @@ function Scene3D() {
       <Link to={"/2d"}>
         <Button className="absolute m-4">Navigate</Button>
       </Link>
-      {Loading}
     </>
   );
 }

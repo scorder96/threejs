@@ -7,7 +7,7 @@ function Scene2D() {
       <Link to={"/3d"}>
         <Button className="absolute m-4">Exit Navigation</Button>
       </Link>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center h-screen w-screen absolute">
         <img src="stationmap.png" alt="" className="h-screen" />
       </div>
     </>
