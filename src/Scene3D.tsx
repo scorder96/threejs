@@ -9,6 +9,8 @@ import local_parking from "/src/assets/local_parking.svg";
 import restaurant from "/src/assets/restaurant.svg";
 import washroom from "/src/assets/washroom.svg";
 import { useState } from "react";
+import "/src/assets/railwayst1.gltf";
+
 function Scene3D() {
   const scene = new THREE.Scene();
   var light = new THREE.AmbientLight(0xffffff);
@@ -38,7 +40,7 @@ function Scene3D() {
   const [Loading, setLoading] = useState(String);
   const loader = new GLTFLoader();
   loader.load(
-    "/railwayst1light.glb",
+    "/src/assets/railwayst1.gltf",
     function (gltf) {
       // gltf.scene.scale.set(4, 4, 4);
       scene.add(gltf.scene);
