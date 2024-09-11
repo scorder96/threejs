@@ -9,7 +9,6 @@ import local_parking from "/src/assets/local_parking.svg";
 import restaurant from "/src/assets/restaurant.svg";
 import washroom from "/src/assets/washroom.svg";
 import { useState } from "react";
-import { string } from "three/webgpu";
 function Scene3D() {
   const scene = new THREE.Scene();
   var light = new THREE.AmbientLight(0xffffff);
