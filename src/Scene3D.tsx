@@ -38,7 +38,7 @@ function Scene3D() {
   const [Loading, setLoading] = useState(String);
   const loader = new GLTFLoader();
   loader.load(
-    "/railwayst1.gltf",
+    "/railwayst1light.glb",
     function (gltf) {
       // gltf.scene.scale.set(4, 4, 4);
       scene.add(gltf.scene);
